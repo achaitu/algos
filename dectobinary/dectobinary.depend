@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1542208367 source:d:\hackerrank\dectobinary\main.cpp
+	<iostream>
+	<bits/stdc++.h>
+	<string>
+

@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1543418628 source:d:\hackerrank\dijkstras\main.cpp
+	<cmath>
+	<cstdio>
+	<vector>
+	<iostream>
+	<algorithm>
+	<bits/stdc++.h>
+	<limits.h>
+

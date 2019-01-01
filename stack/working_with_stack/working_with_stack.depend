@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1534828124 source:d:\hackerrank\stack\working_with_stack\main.c
+	<stdio.h>
+	<string.h>
+	<math.h>
+	<stdlib.h>
+
