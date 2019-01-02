@@ -3,62 +3,94 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
-#include<bits/stdc++.h>
-#include <limits.h>
+#include <bits/stdc++.h>
 using namespace std;
-typedef pair<int, int> iPair;
-void addEdge(vector <pair<int, int> > adj[], int u, int v, int wt)
+
+
+priority_queue < pair<int,int>, deque <pair<int,int>>, greater<pair<int,int>> > H;//min-heap
+
+void constructminheap(int s,int n)
 {
-    adj[u].push_back(make_pair(v, wt));
-    adj[v].push_back(make_pair(u, wt));
+    H.push(make_pair(0,s));
+    for (int i=0;i<n;i++)
+    {
+        if (i!=s)
+        {
+            H.push(make_pair(INT_MAX,i));
+        }
+    }
+    
 }
 
-void shortestPath(vector<iPair >  adj[], int V, int src)
+int Relax(int u,int v,int w,int shortest[])
 {
-
-    priority_queue< iPair, vector <iPair> , greater<iPair> > pq;
-    vector<int> dist(V,INT_MAX);
-    pq.push(make_pair(0, src));
-    dist[src] = 0;
-    while (!pq.empty())
+    if (shortest[u] + w < shortest[v])
     {
-        int u = pq.top().second;
-        pq.pop();
-        for (auto x : adj[u])
+        shortest[v] = shortest[u] + w;
+        H.push(make_pair(shortest[v],v));
+    }
+    return shortest[v];
+}
+
+void Dijkstrass(int s,int n,vector<pair<int,int>> A[])
+{
+    constructminheap(s,n);
+    int shortest[n];
+    fill_n(shortest,n,INT_MAX);
+    shortest[s] = 0;
+    int visited[n] = {0};
+    while(H.size()>=1)
+    {
+        int u;
+        u = H.top().second;
+        visited[u] = 1;
+        shortest[u] = min(H.top().first, shortest[u]);
+        //cout << shortest[u] << " ";
+        H.pop();
+        for (int i=0;i<A[u].size();i++)
         {
-            int v = x.first;
-            int weight = x.second;
-            if (dist[v] > dist[u] + weight)
+            if(visited[A[u][i].second] != 1)
             {
-                dist[v] = dist[u] + weight;
-                pq.push(make_pair(dist[v], v));
+                shortest[A[u][i].second] = Relax(u,A[u][i].second,A[u][i].first,shortest);
+                //cout << A[u][i].second << "-->" << shortest[A[u][i].second] << endl;
             }
         }
     }
-    for (int i = 0; i < V; ++i)
-        printf("%d ",dist[i]);
+//cout << n;
+    for(int j = 0; j<n ; j++){
+        if(shortest[j] == INT_MAX){
+            cout << -1 << " ";
+        }else{
+            cout << shortest[j] << " ";
+        }
+    }
+    cout << endl;
 }
-int main()
-{
-    int iter;
-    cin >> iter;
-    for(int i = 0;i<iter;i++){
-    int m,n,sou;
-    cin>>m >> n;
-    //cin>>n;
-    int V = m;
-    vector<iPair > adj[V];
-    for(int j=0;j<n;j++){
-    int temp1,temp2,temp3;
-    cin>>temp1;
-    cin>>temp2;
-    cin>>temp3;
-    addEdge(adj, temp1, temp2, temp3);
-    }
-    cin >> sou;
-    shortestPath(adj, V, sou);
-    printf("\n");
-    }
 
+
+int main() {
+    int t;
+    cin >> t;
+    for (int i; i<t;i++)
+    {
+        int n,m;
+        cin >> n;
+        cin >> m;
+        vector<pair<int,int>> A[n];
+        int u,v,w;
+        for (int j=0;j<m;j++)
+        {
+            cin >> u >> v >> w;
+            A[u].push_back(make_pair(w,v));
+            A[v].push_back(make_pair(w,u));
+            
+        }
+        int s;
+        cin >> s;
+        Dijkstrass(s,n,A);
+      //  cout << a;
+    }
+    
+    
     return 0;
 }

@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1536488606 source:d:\hackerrank\df\main.c
-	<stdio.h>
-	<string.h>
-	<math.h>
-	<stdlib.h>
-
