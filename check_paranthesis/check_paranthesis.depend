@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1535481386 source:d:\hackerrank\check_paranthesis\main.c
+	<stdio.h>
+	<stdlib.h>
+

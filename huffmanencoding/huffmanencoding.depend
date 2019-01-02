@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1542190932 source:d:\hackerrank\huffmanencoding\main.cpp
+	<cmath>
+	<cstdio>
+	<vector>
+	<iostream>
+	<algorithm>
+	<string>
+	<bits/stdc++.h>
+	<sstream>
+
